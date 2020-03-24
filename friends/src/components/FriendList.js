@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
+import Friend from './Friend';
+
 const FriendList = (props) => {
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -11,7 +13,13 @@ const FriendList = (props) => {
             .catch((error) => console.error(`${error.response.status}: ${error.response.statusText}`));
     }, [])
     return (
-        <h1>Hello from Friend List</h1>
+        <>
+            {data.map((friend) => {
+                return (
+                    <Friend friend={friend} />
+                )
+            })}
+        </>
     )
 }
 
