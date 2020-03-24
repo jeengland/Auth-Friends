@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const Login = (props) => {
     const [login, setLogin] = useState({username: '', password: ''});
     const [error, setError] = useState('');
+    const history = useHistory();
     const handleChange = (event) => {
         setLogin({
             ...login,
@@ -18,6 +20,7 @@ const Login = (props) => {
             .then((response) => {
                 localStorage.setItem('token', response.data.payload);
                 setError('');
+                history.push('/friend_list')
             })
             .catch((error) => setError(error.response.data.error));
         setLogin({username: '', password: ''});

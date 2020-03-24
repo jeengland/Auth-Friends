@@ -1,13 +1,14 @@
 import React from 'react';
 import { render, fireEvent, wait } from '@testing-library/react';
 import Login from './Login';
+import App from '../App';
 
 test('renders Login without crashing', () => {
-    render(<Login />);
+    render(<App><Login /></App>);
 })
 
 test('correct login correctly authenticates', async () => {
-    const { getByText, getByLabelText, queryByText } = render(<Login />)
+    const { getByText, getByLabelText, queryByText } = render(<App><Login /></App>)
     const username = getByLabelText(/username/i);
     const password = getByLabelText(/password/i);
     const submit = getByText(/login/i);
@@ -20,7 +21,7 @@ test('correct login correctly authenticates', async () => {
 })
 
 test('incorrect login correctly displays error', async () => {
-    const { getByText, getByLabelText, queryByText } = render(<Login />)
+    const { getByText, getByLabelText, queryByText } = render(<App><Login /></App>)
     const username = getByLabelText(/username/i);
     const password = getByLabelText(/password/i);
     const submit = getByText(/login/i);
